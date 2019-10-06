@@ -17,27 +17,23 @@ module.exports = {
   output: {
     path: distDir,
     filename: "index.js",
-    libraryTarget: "umd"
+    libraryTarget: "commonjs"
   },
 
   devtool: isProduction ? "source-map" : "cheap-source-map",
-
-  stats: isProduction ? "normal" : "errors-only",
 
   module: {
     rules: [
       {
         test: /\.js$/,
         use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"]
-          }
+          loader: "babel-loader"
         },
         include: srcDir
       }
     ]
   },
+  externals: ["puppeteer"],
 
   plugins: [new CleanWebpackPlugin()],
 

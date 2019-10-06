@@ -7,11 +7,11 @@ const sanatiseRoutes = values =>
   values
     .split(",")
     .map(value => addStartingSlash(removeEndingSlash(value.trim())));
-const sanatiseOutput = value => resolve(__dirname, removeEndingSlash(value));
+const sanatiseOutput = value => resolve(".", removeEndingSlash(value));
 
 const { argv } = yargs
   .example(
-    'watermellon --root http://localhost:4200 --routes "/,/login,/register" --output ./dist'
+    'watermelon --root http://localhost:4200 --routes "/,/login,/register" --output ./dist'
   )
   .option("root", {
     demandOption: true,

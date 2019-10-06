@@ -13,7 +13,9 @@ const logo = chalk.hex(PINK).bgHex(MINT).bold(`
                                                            
 `);
 
-const createTitle = value => chalk.hex(PINK)(`${EMOJI} ${value}:`);
+const createTitle = value => chalk.hex(PINK).bold(`${EMOJI} ${value}:`);
+const createHeading = (heading, value) =>
+  chalk.hex(PINK)(`${BULLET}${heading}: `) + chalk.hex(MINT)(encodeURI(value));
 const createArg = values =>
   chalk.hex(MINT)(
     values.reduce(
@@ -24,6 +26,11 @@ ${BULLET}${encodeURI(value)}`,
       ""
     )
   );
+
+module.exports.logTitle = value => {
+  console.log(SPACER);
+  console.log(createTitle(value));
+};
 
 module.exports.logIntro = ({ root, routes, output }) => {
   console.log(SPACER);
@@ -37,5 +44,10 @@ module.exports.logIntro = ({ root, routes, output }) => {
   console.log(SPACER);
   console.log(createTitle("Output"));
   console.log(createArg([output]));
+};
+
+module.exports.logRender = (url, path) => {
   console.log(SPACER);
+  console.log(createHeading("From", url));
+  console.log(createHeading("To", path));
 };
